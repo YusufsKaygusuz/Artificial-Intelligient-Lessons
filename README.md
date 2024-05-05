@@ -15,8 +15,28 @@
 ## 📚 İçindekiler
 | Hafta | Haftalık İçerik                             |
 |-------|--------------------------------------------|
-| 📆 Week 1 | [**İris Veri Seti ile Sınıflandırma Algoritmaları**](#week-1-iris-veri-seti-ile-sınıflandırma-algoritmaları) |
+| 📆 Week 1 | [**Iris Veri Seti ile Sınıflandırma**](#week-1-iris-veri-seti-ile-sınıflandırma) |
 | 📆 Week 2 | [**Karar Verme Yapılarına Giriş If-Else if-else**](#week-2-karar-verme-yapılarına-giriş-if-else-if-else) |
 
-## Week 1: İris Veri Seti ile Sınıflandırma Algoritmaları
+## Week 1: Iris Veri Seti ile Sınıflandırma
 
+Bu proje, Python dilinde scikit-learn kütüphanesini kullanarak Iris veri setini kullanarak K En Yakın Komşu (K Neighbors) ve Karar Ağacı (Decision Tree) sınıflandırma algoritmalarını nasıl uygulayacağınızı adım adım göstermektedir.
+
+<h3>Iris Veri Seti</h3>
+
+İris veri seti, bitki bilimi alanında yaygın olarak kullanılan bir veri setidir. Üç farklı türde (setosa, versicolor, virginica) 150 adet iris çiçeği örneğini içerir. Her bir örnek için dört özellik (uzunluk ve genişlik gibi) mevcuttur.
+
+K En Yakın Komşu (K Neighbors) Algoritması
+
+K En Yakın Komşu algoritması, bir veri noktasını sınıflandırmak için komşularının etiketlerini kullanır. Bu proje, K En Yakın Komşu algoritması kullanarak Iris veri setini sınıflandırmayı göstermektedir.
+
+Karar Ağacı (Decision Tree) Algoritması
+
+Karar Ağacı algoritması, bir dizi karar kuralı kullanarak veri noktalarını sınıflandırır. Bu proje, Karar Ağacı algoritmasını kullanarak Iris veri setini sınıflandırmayı göstermektedir.
+
+Kurulum
+
+Bu projeyi çalıştırmak için Python ve scikit-learn kütüphanesinin yüklü olması gerekir. İlgili kütüphaneleri yüklemek için terminale şu komutu yazabilirsiniz:
+
+Copy code
+pip install scikit-learn seaborn pandas matplotlib
