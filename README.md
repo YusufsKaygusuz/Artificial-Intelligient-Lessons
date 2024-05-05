@@ -14,20 +14,21 @@
 | Hafta | Haftalık İçerik                             |
 |-------|--------------------------------------------|
 | 📆 Week 1 | [**Iris Veri Seti ile Sınıflandırma**](#week-1-iris-veri-seti-ile-sınıflandırma) |
+| 📆 Week 2 | [**Bulaşık Yıkama Süresi Kontrol Sistemi**](#week-2-bulaşık-yıkama-süresi-kontrol-sistemi) |
 
 ## Week 1: Iris Veri Seti ile Sınıflandırma
 
 Bu proje, Python dilinde scikit-learn kütüphanesini kullanarak Iris veri setini kullanarak K En Yakın Komşu (K Neighbors) ve Karar Ağacı (Decision Tree) sınıflandırma algoritmalarını nasıl uygulayacağınızı adım adım göstermektedir.
 
-<h3>Iris Veri Seti</h3>
+<h3>☘️ Iris Veri Seti</h3>
 
 İris veri seti, bitki bilimi alanında yaygın olarak kullanılan bir veri setidir. Üç farklı türde (setosa, versicolor, virginica) 150 adet iris çiçeği örneğini içerir. Her bir örnek için dört özellik (uzunluk ve genişlik gibi) mevcuttur.
 
-<h3>K En Yakın Komşu (K Neighbors) Algoritması</h3>
+<h3>🦾 K En Yakın Komşu (K Neighbors) Algoritması</h3>
 
 K En Yakın Komşu algoritması, bir veri noktasını sınıflandırmak için komşularının etiketlerini kullanır. Bu proje, K En Yakın Komşu algoritması kullanarak Iris veri setini sınıflandırmayı göstermektedir.
 
-<h3>Kurulum</h3>
+<h3>🛠️ Kurulum</h3>
 
 Bu projeyi çalıştırmak için Python ve scikit-learn kütüphanesinin yüklü olması gerekir. İlgili kütüphaneleri yüklemek için terminale şu komutu yazabilirsiniz:
 
@@ -35,8 +36,8 @@ Bu projeyi çalıştırmak için Python ve scikit-learn kütüphanesinin yüklü
 pip install scikit-learn seaborn pandas matplotlib
 ```
 
-<h2> Kod Analizi </h2>
-<h3>Veri Seti Yükleme</h3>
+<h2>🔎 Kod Analizi </h2>
+<h3>1. Veri Seti Yükleme</h3>
 İlk adımda, sklearn.datasets modülünden load_iris() fonksiyonunu kullanarak Iris veri setini yüklüyoruz.
 
 ```python
@@ -44,7 +45,7 @@ from sklearn.datasets import load_iris
 iris = load_iris()
 ```
 
-<h3>Veri Seti Hakkında Bilgiler</h3>
+<h3>2. Veri Seti Hakkında Bilgiler</h3>
 Daha sonra, yüklenen veri setinin özellik adlarını, hedef sınıf adlarını, hedef sınıf dizisini ve veri noktalarını yazdırıyoruz.
 
 ```python
@@ -54,7 +55,7 @@ print (iris.target)
 print (iris.data)
 ```
 
-<h3>Veri Setini Eğitim ve Test Setlerine Bölme</h3>
+<h3>3. Veri Setini Eğitim ve Test Setlerine Bölme</h3>
 Veri setini eğitim ve test setlerine bölmek için train_test_split() fonksiyonunu kullanıyoruz.
 
 ```python
@@ -62,7 +63,7 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.20, random_state = 0)
 ```
 
-<h3>K En Yakın Komşu Modeli Oluşturma ve Eğitme</h3>
+<h3>4. K En Yakın Komşu Modeli Oluşturma ve Eğitme</h3>
 K En Yakın Komşu sınıflandırma modelini oluşturmak için KNeighborsClassifier() sınıfını kullanıyoruz ve ardından eğitim verilerini bu modele uyum sağlıyoruz.
 
 ```python
@@ -71,7 +72,7 @@ model =  KNeighborsClassifier()
 model.fit(X_train,Y_train)
 ```
 
-<h3>Model Performansını Değerlendirme</h3>
+<h3>5. Model Performansını Değerlendirme</h3>
 Eğitilen modelin performansını değerlendirmek için test seti üzerinde tahminler yaparak bir hata matrisi oluşturuyoruz ve bu matrisi yazdırıyoruz.
 
 ```python
@@ -81,7 +82,7 @@ hata_matrisi = confusion_matrix(Y_test, Y_tahmin)
 print(hata_matrisi)
 ```
 
-<h3>Hata Matrisini Görselleştirme</h3>
+<h3>6. Hata Matrisini Görselleştirme</h3>
 Son olarak, oluşturduğumuz hata matrisini bir ısı haritası olarak görselleştiriyoruz.
 
 ```python
@@ -94,3 +95,70 @@ hata_goster = pd.DataFrame(hata_matrisi,columns,index)
 plt.figure(figsize=(10,6))  
 sns.heatmap(hata_goster, annot=True)
 ```
+
+
+## Week 2: Bulaşık Yıkama Süresi Kontrol Sistemi
+Bu hafta, bulanıklık mantığı (fuzzy logic) kullanarak bulaşık miktarı ve kirlilik seviyesi gibi girdi değişkenlerine dayanarak bulaşık yıkama süresini belirleyen bir kontrol sistemi oluşturulur.
+
+<h2>🔎 Kod Analizi</h2>
+<h3>1. İlgili kütüphanelerin yüklenmesi</h3>
+
+```python
+import numpy as np
+import skfuzzy as fuzz
+from skfuzzy import control as ctrl
+```
+
+<h3>2. Giriş ve çıkış değişkenlerinin tanımlanması</h3>
+
+```python
+bulaşık_miktarı = ctrl.Antecedent(np.arange(0, 100, 1), 'bulaşık miktarı')
+kirlilik = ctrl.Antecedent(np.arange(0, 100, 1), 'kirlilik seviyesi')
+yıkama_süresi = ctrl.Consequent(np.arange(0, 180, 1), 'yıkama süresi')
+```
+
+<h3>3. Üyelik fonksiyonlarının tanımlanması</h3>
+
+```python
+bulaşık_miktarı['az'] = fuzz.trimf(bulaşık_miktarı.universe, [0, 0, 30])
+bulaşık_miktarı['normal'] = fuzz.trimf(bulaşık_miktarı.universe, [10, 30, 60])
+bulaşık_miktarı['çok'] = fuzz.trimf(bulaşık_miktarı.universe, [50, 60, 100])
+
+kirlilik['az'] = fuzz.trimf(kirlilik.universe, [0, 0, 30])
+kirlilik['normal'] = fuzz.trimf(kirlilik.universe, [10, 30, 60])
+kirlilik['çok'] = fuzz.trimf(kirlilik.universe, [50, 60, 100])
+
+yıkama_süresi['kısa'] = fuzz.trimf(yıkama_süresi.universe, [0, 0, 50])
+yıkama_süresi['normal'] = fuzz.trimf(yıkama_süresi.universe, [40, 50, 100])
+yıkama_süresi['uzun'] = fuzz.trimf(yıkama_süresi.universe, [60, 80, 180])
+```
+
+<h3>4. Kuralların Tanımlanması</h3>
+
+```python
+kural1 = ctrl.Rule(bulaşık_miktarı['az'] & kirlilik['az'], yıkama_süresi['kısa'])
+kural2 = ctrl.Rule(bulaşık_miktarı['normal'] & kirlilik['az'], yıkama_süresi['normal'])
+```
+
+<h3>5. Kontrol sistemi ile simülasyon oluşturulması</h3>
+  
+```python
+kontrol_sistemi = ctrl.ControlSystem([kural1, kural2, ..., kural9])
+model = ctrl.ControlSystemSimulation(kontrol_sistemi)
+```
+
+<h3>6. Girdi değerleri atanır ve çıktı hesaplanır</h3>
+  
+```python
+model.input['bulaşık miktarı'] = 50
+model.input['kirlilik seviyesi'] = 80
+model.compute()
+```
+
+<h3>7. Sonuç yazdırılır</h3>
+
+```python
+print(model.output['yıkama süresi'])
+```
+
+Bu betik, bulanıklık mantığı kullanarak bulaşık yıkama süresini belirler. Bu sayede karmaşık sistemlerdeki belirsizliği ve doğrusal olmayan ilişkileri modellemek için kullanılabilir.
