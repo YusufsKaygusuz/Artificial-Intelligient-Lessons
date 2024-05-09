@@ -242,3 +242,16 @@ print("Accuracy: ", metrics.accuracy_score(y_test, y_pred))
 <p>📖sklearn: Makine öğrenimi algoritmalarını ve metriklerini içerir.</p>
 <p>🎨seaborn: Veri görselleştirmesi için kullanılır.</p>
 <p>🎨matplotlib: Grafik çizimleri için kullanılır.</p>
+
+<h3>Naive Bayes Sınıflandırma Alg. <strong>%82,96</strong> Doğruluk Değeri</h3>
+<img src="https://github.com/YusufsKaygusuz/Artificial-Intelligient-Lessons/assets/86704802/9b900941-9be1-4e3c-a561-e7a84372e10c" alt="ReLU" width="550"/> 
+
+<h3>Decision Tree Sınıflandırma Alg. <strong>%95,26</strong> Doğruluk Değeri</h3>
+<img src="https://github.com/YusufsKaygusuz/Artificial-Intelligient-Lessons/assets/86704802/4119e0ed-e4be-46c4-8429-528d309e4a17" alt="ReLU" width="550"/> 
+
+<h3>Decision Tree Sınıflandırma Alg. (K-Cross = 10) <strong>%95,48</strong> Doğruluk Değeri</h3>
+<img src="https://github.com/YusufsKaygusuz/Artificial-Intelligient-Lessons/assets/86704802/62e6f831-72f9-4587-9094-10bc6fc50530" alt="ReLU" width="550"/> 
+
+
+
+
