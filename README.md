@@ -237,8 +237,8 @@ print("Accuracy: ", metrics.accuracy_score(y_test, y_pred))
 
 <h4>Kullanılan Kütüphaneler</h4>
 
-<p>numpy: Sayısal hesaplamalar için kullanılır.</p>
-<p>pandas: Veri manipülasyonu ve analizi için kullanılır.</p>
-<p>sklearn: Makine öğrenimi algoritmalarını ve metriklerini içerir.</p>
-<p>seaborn: Veri görselleştirmesi için kullanılır.</p>
-<p>matplotlib: Grafik çizimleri için kullanılır.</p>
+<p>♾️numpy: Sayısal hesaplamalar için kullanılır.</p>
+<p>📚pandas: Veri manipülasyonu ve analizi için kullanılır.</p>
+<p>📖sklearn: Makine öğrenimi algoritmalarını ve metriklerini içerir.</p>
+<p>🎨seaborn: Veri görselleştirmesi için kullanılır.</p>
+<p>🎨matplotlib: Grafik çizimleri için kullanılır.</p>
