@@ -15,6 +15,7 @@
 |-------|--------------------------------------------|
 | 📆 Week 1 | [**Iris Veri Seti ile Sınıflandırma**](#week-1-iris-veri-seti-ile-sınıflandırma) |
 | 📆 Week 2 | [**Bulaşık Yıkama Süresi Kontrol Sistemi**](#week-2-bulaşık-yıkama-süresi-kontrol-sistemi) |
+| 📆 Week 3 | [**Naive Bayes ile Kalp Ritim Tespiti**](#week-3-naive-bayes-ile-kalp-ritim-tespiti) |
 
 ## Week 1: Iris Veri Seti ile Sınıflandırma
 
@@ -162,3 +163,82 @@ print(model.output['yıkama süresi'])
 ```
 
 Bu betik, bulanıklık mantığı kullanarak bulaşık yıkama süresini belirler. Bu sayede karmaşık sistemlerdeki belirsizliği ve doğrusal olmayan ilişkileri modellemek için kullanılabilir.
+
+
+
+
+## Week 3: Naive Bayes ile Kalp Ritim Tespiti
+
+Bu proje, elektrokardiyogram (EKG) verilerini kullanarak Naive Bayes sınıflandırıcısını uygulamayı amaçlar. EKG sinyalleri, kalp ritminin analizinde kullanılan temel verilerdir.
+
+<h3>Amaç</h3>
+
+EKG sinyallerini işleyerek, sinyaldeki farklı aritmileri (kalp ritim bozuklukları) sınıflandırmak.
+Naive Bayes sınıflandırıcısını kullanarak aritmileri doğru bir şekilde tanımlamak.
+
+<h3>Adımlar</h3>
+
+Veri Yükleme: Eğitim ve test veri setleri pandas kütüphanesi kullanılarak yüklenir.
+Veri Hazırlığı: Veri setleri özellikler ve etiketler olarak ayrılır.
+Model Eğitimi: Naive Bayes sınıflandırıcısı kullanılarak model eğitilir.
+Tahminler: Test veri seti üzerinde tahminler yapılır.
+Değerlendirme: Modelin performansı, karmaşıklık matrisi ve doğruluk metriği kullanılarak değerlendirilir.
+
+<h3>Kullanılan Kod Parçaları</h3>
+
+<h4>Veri setlerini yükleme ve özellikler ile etiketlerin ayrılması:</h4>
+
+```python
+import numpy as np
+import pandas as pd
+
+train = pd.read_csv("mitbih_train.csv")
+X_train = np.array(train)[:, :187] # Özellikler
+y_train = np.array(train)[:, 187]  # Etiketler
+
+test = pd.read_csv("mitbih_test.csv")
+X_test = np.array(test)[:, :187] # Özellikler
+y_test = np.array(test)[:, 187]  # Etiketler
+```
+
+<h4>Model eğitimi ve tahminlerin yapılması:</h4>
+
+```python
+from sklearn.naive_bayes import CategoricalNB
+
+gnb = CategoricalNB()
+gnb.fit(X_train, y_train)
+
+y_pred = gnb.predict(X_test)
+```
+
+
+<h4>Değerlendirme ve sonuçların görselleştirilmesi:</h4>
+
+```python
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+cm = confusion_matrix(y_test, y_pred)
+
+index = ['No' , 'S', 'V', 'F', 'Q']
+columns = ['No' , 'S', 'V', 'F', 'Q']
+cm_df = pd.DataFrame(cm, columns, index)
+
+plt.figure(figsize=(10,6))
+sns.heatmap(cm_df, annot=True, fmt="d", cmap="YlGnBu")
+plt.show()
+
+from sklearn import metrics
+print("Accuracy: ", metrics.accuracy_score(y_test, y_pred))
+```
+
+
+<h4>Kullanılan Kütüphaneler</h4>
+
+<p>numpy: Sayısal hesaplamalar için kullanılır.</p>
+<p>pandas: Veri manipülasyonu ve analizi için kullanılır.</p>
+<p>sklearn: Makine öğrenimi algoritmalarını ve metriklerini içerir.</p>
+<p>seaborn: Veri görselleştirmesi için kullanılır.</p>
+<p>matplotlib: Grafik çizimleri için kullanılır.</p>
