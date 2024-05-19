@@ -98,6 +98,7 @@ plt.figure(figsize=(10,6))
 sns.heatmap(hata_goster, annot=True)
 ```
 
+---e
 
 ## Week 2: Bulaşık Yıkama Süresi Kontrol Sistemi
 Bu hafta, bulanıklık mantığı (fuzzy logic) kullanarak bulaşık miktarı ve kirlilik seviyesi gibi girdi değişkenlerine dayanarak bulaşık yıkama süresini belirleyen bir kontrol sistemi oluşturulur.
@@ -165,9 +166,7 @@ print(model.output['yıkama süresi'])
 
 Bu betik, bulanıklık mantığı kullanarak bulaşık yıkama süresini belirler. Bu sayede karmaşık sistemlerdeki belirsizliği ve doğrusal olmayan ilişkileri modellemek için kullanılabilir.
 
-
-
-
+---
 ## Week 3: Naive Bayes ile Kalp Ritim Tespiti
 
 Bu proje, elektrokardiyogram (EKG) verilerini kullanarak Naive Bayes sınıflandırıcısını uygulamayı amaçlar. EKG sinyalleri, kalp ritminin analizinde kullanılan temel verilerdir.
@@ -253,6 +252,7 @@ print("Accuracy: ", metrics.accuracy_score(y_test, y_pred))
 <h3>Decision Tree Sınıflandırma Alg. (K-Cross = 10) <strong>%95,48</strong> Doğruluk Değeri</h3>
 <img src="https://github.com/YusufsKaygusuz/Artificial-Intelligient-Lessons/assets/86704802/62e6f831-72f9-4587-9094-10bc6fc50530" alt="ReLU" width="550"/> 
 
+---
 
 ## Week 4: Kalp Ritim Bozukluğu Tespiti ve Hastalıklı Yaprak Analizi
 
