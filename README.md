@@ -98,7 +98,7 @@ plt.figure(figsize=(10,6))
 sns.heatmap(hata_goster, annot=True)
 ```
 
----e
+---
 
 ## Week 2: Bulaşık Yıkama Süresi Kontrol Sistemi
 Bu hafta, bulanıklık mantığı (fuzzy logic) kullanarak bulaşık miktarı ve kirlilik seviyesi gibi girdi değişkenlerine dayanarak bulaşık yıkama süresini belirleyen bir kontrol sistemi oluşturulur.
