@@ -16,6 +16,7 @@
 | 📆 Week 1 | [**Iris Veri Seti ile Sınıflandırma**](#week-1-iris-veri-seti-ile-sınıflandırma) |
 | 📆 Week 2 | [**Bulaşık Yıkama Süresi Kontrol Sistemi**](#week-2-bulaşık-yıkama-süresi-kontrol-sistemi) |
 | 📆 Week 3 | [**Naive Bayes ile Kalp Ritim Tespiti**](#week-3-naive-bayes-ile-kalp-ritim-tespiti) |
+| 📆 Week 4 | [**Kalp Ritim Bozukluğu Tespiti ve Hastalıklı Yaprak Analizi**](#week-4-kalp-ritim-bozukluğu-tespiti-ve-hastalıklı-yaprak-analizi) |
 
 ## Week 1: Iris Veri Seti ile Sınıflandırma
 
@@ -251,6 +252,138 @@ print("Accuracy: ", metrics.accuracy_score(y_test, y_pred))
 
 <h3>Decision Tree Sınıflandırma Alg. (K-Cross = 10) <strong>%95,48</strong> Doğruluk Değeri</h3>
 <img src="https://github.com/YusufsKaygusuz/Artificial-Intelligient-Lessons/assets/86704802/62e6f831-72f9-4587-9094-10bc6fc50530" alt="ReLU" width="550"/> 
+
+
+## Week 4: Kalp Ritim Bozukluğu Tespiti ve Hastalıklı Yaprak Analizi
+
+Bu kod, pirinç yaprak hastalıklarını sınıflandırmak için bir makine öğrenimi modeli oluşturur. Aşağıda, kodun her bölümünü ayrıntılı olarak açıkladım.
+<h3>Kullanılan Kütüphaneneler</h3>
+
+```python
+import numpy as np
+import pandas as pd
+import os
+import PIL.Image as img
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn import metrics
+```
+
+- numpy: Sayısal işlemler için kullanılır.
+- pandas: Veri analizi ve veri manipülasyonu için kullanılır.
+- os: Dosya ve dizin işlemleri için kullanılır.
+- PIL.Image: Görüntü işleme için kullanılır.
+- sklearn.model_selection: Veri setini eğitim ve test kümelerine ayırmak için kullanılır.
+- sklearn.ensemble: RandomForestClassifier modelini oluşturmak için kullanılır.
+- sklearn.metrics: Modelin doğruluğunu ölçmek için kullanılır.
+
+<h3>Dosya ve Dizin İşlemleri</h3>
+
+```python
+bakteri_yaprak_yanik = "rice_leaf_diseases/Bacterial leaf blight/"
+kahve_nokta = "rice_leaf_diseases/Brown spot/"
+yaprak_isi = "rice_leaf_diseases/Leaf smut"
+
+def dosya(yol):
+    return [os.path.join(yol, f) for f in os.listdir(yol)]
+```
+
+- bakteri_yaprak_yanik, kahve_nokta, yaprak_isi: Farklı hastalık türlerine ait görüntülerin bulunduğu dizinlerin yolları.
+- dosya: Belirtilen yoldaki tüm dosyaların tam yolunu döndüren bir fonksiyon.
+
+
+<h3> Veri Dönüştürme </h3>
+
+```python
+def veri_donusturme(klasor_adi, sinif_adi):
+    goruntuler = dosya(klasor_adi)
+    
+    goruntu_sinif = []
+    for goruntu in goruntuler:
+        goruntu_oku = img.open(goruntu).convert('L')
+        gorunu_boyutlandirma = goruntu_oku.resize((28, 28))
+        goruntu_donusturme = np.array(gorunu_boyutlandirma).flatten()
+        if sinif_adi == "bakteri_yaprak_yanik":
+            veriler = np.append(goruntu_donusturme, [0])
+        elif sinif_adi == "kahve_nokta":
+            veriler = np.append(goruntu_donusturme, [1])
+        elif sinif_adi == "yaprak_isi":
+            veriler = np.append(goruntu_donusturme, [2])
+        else:
+            continue
+        goruntu_sinif.append(veriler)
+
+    return goruntu_sinif
+```
+
+- veri_donusturme: Belirtilen klasördeki görüntüleri okuyup, 28x28 boyutuna getirerek düzleştirir ve sınıf etiketleriyle birlikte bir listeye ekler.
+
+<h3> Verilerin Data Setlerinden Yüklenmesi ve Birleştirilmesi </h3>
+
+```python
+yanik_veri = veri_donusturme(bakteri_yaprak_yanik, "bakteri_yaprak_yanik")
+yanik_veri_df = pd.DataFrame(yanik_veri)
+
+kahve_nokta_veri = veri_donusturme(kahve_nokta, "kahve_nokta")
+kahve_nokta_veri_df = pd.DataFrame(kahve_nokta_veri)
+
+yaprak_isi_veri = veri_donusturme(yaprak_isi, "yaprak_isi")
+yaprak_isi_veri_df = pd.DataFrame(yaprak_isi_veri)
+
+tum_veri = pd.concat([yanik_veri_df, kahve_nokta_veri_df, yaprak_isi_veri_df])
+```
+
+- Her bir hastalık sınıfı için veri_donusturme fonksiyonu kullanılarak veriler okunur ve bir DataFrame'e dönüştürülür.
+- Tüm veriler birleştirilir.
+
+
+<h3>Giriş ve Çıkış Verilerinin Hazırlanması</h3>
+
+```python
+Giris = np.array(tum_veri)[:,:784]
+Cikis = np.array(tum_veri)[:,784]
+```
+
+- Giris: Görüntü verilerini içerir.
+- Cikis: Sınıf etiketlerini içerir.
+
+
+<h3>Veri Setinin Eğitim(Train) ve test Kümelerine Ayrılması</h3>
+
+```python
+Giris_train, Giris_test, Cikis_train, Cikis_test = train_test_split(Giris, Cikis, test_size=0.2, random_state=109)
+```
+
+- Veri seti %80 eğitim ve %20 test olacak şekilde ayrılır.
+
+
+
+<h3>Modelin Eğitilmesi ve Test Edilmesi</h3>
+
+```python
+model = RandomForestClassifier()
+model.fit(Giris_train, Cikis_train)
+```
+
+- RandomForestClassifier modeli oluşturulur ve eğitim verileriyle eğitilir.
+
+
+<h3>Tahmin Yapılması ve Doğruluk Ölçümü</h3>
+
+```python
+Cikis_pred = model.predict(Giris_test)
+print("Doğruluk:", metrics.accuracy_score(Cikis_test, Cikis_pred))
+```
+
+- Test verileri üzerinde tahmin yapılır ve modelin doğruluğu ölçülür.
+
+
+<h3>Özetle Neyi Hedefledik? </h3>
+
+<p>Kod, pirinç yaprak hastalıklarını sınıflandırmak için bir makine öğrenimi modeli oluşturur ve modelin doğruluğunu ölçer. Bu model, görüntüleri gri tonlamalı yapıp, yeniden boyutlandırarak ve düzleştirerek çalışır. RandomForestClassifier kullanılarak hastalık sınıflandırması yapılır ve test verileri üzerinde doğruluk ölçülür. </p>
+
+
+
 
 
 
