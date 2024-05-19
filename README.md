@@ -257,7 +257,7 @@ print("Accuracy: ", metrics.accuracy_score(y_test, y_pred))
 ## Week 4: Kalp Ritim Bozukluğu Tespiti ve Hastalıklı Yaprak Analizi
 
 Bu kod, pirinç yaprak hastalıklarını sınıflandırmak için bir makine öğrenimi modeli oluşturur. Aşağıda, kodun her bölümünü ayrıntılı olarak açıkladım.
-<h3>Kullanılan Kütüphaneneler</h3>
+<h3>1. Kullanılan Kütüphaneneler</h3>
 
 ```python
 import numpy as np
@@ -277,7 +277,7 @@ from sklearn import metrics
 - sklearn.ensemble: RandomForestClassifier modelini oluşturmak için kullanılır.
 - sklearn.metrics: Modelin doğruluğunu ölçmek için kullanılır.
 
-<h3>Dosya ve Dizin İşlemleri</h3>
+<h3>2. Dosya ve Dizin İşlemleri</h3>
 
 ```python
 bakteri_yaprak_yanik = "rice_leaf_diseases/Bacterial leaf blight/"
@@ -292,7 +292,7 @@ def dosya(yol):
 - dosya: Belirtilen yoldaki tüm dosyaların tam yolunu döndüren bir fonksiyon.
 
 
-<h3> Veri Dönüştürme </h3>
+<h3>3. Veri Dönüştürme </h3>
 
 ```python
 def veri_donusturme(klasor_adi, sinif_adi):
@@ -318,7 +318,7 @@ def veri_donusturme(klasor_adi, sinif_adi):
 
 - veri_donusturme: Belirtilen klasördeki görüntüleri okuyup, 28x28 boyutuna getirerek düzleştirir ve sınıf etiketleriyle birlikte bir listeye ekler.
 
-<h3> Verilerin Data Setlerinden Yüklenmesi ve Birleştirilmesi </h3>
+<h3>4. Verilerin Data Setlerinden Yüklenmesi ve Birleştirilmesi </h3>
 
 ```python
 yanik_veri = veri_donusturme(bakteri_yaprak_yanik, "bakteri_yaprak_yanik")
@@ -337,7 +337,7 @@ tum_veri = pd.concat([yanik_veri_df, kahve_nokta_veri_df, yaprak_isi_veri_df])
 - Tüm veriler birleştirilir.
 
 
-<h3>Giriş ve Çıkış Verilerinin Hazırlanması</h3>
+<h3>5. Giriş ve Çıkış Verilerinin Hazırlanması</h3>
 
 ```python
 Giris = np.array(tum_veri)[:,:784]
@@ -348,7 +348,7 @@ Cikis = np.array(tum_veri)[:,784]
 - Cikis: Sınıf etiketlerini içerir.
 
 
-<h3>Veri Setinin Eğitim(Train) ve test Kümelerine Ayrılması</h3>
+<h3>6. Veri Setinin Eğitim(Train) ve test Kümelerine Ayrılması</h3>
 
 ```python
 Giris_train, Giris_test, Cikis_train, Cikis_test = train_test_split(Giris, Cikis, test_size=0.2, random_state=109)
@@ -358,7 +358,7 @@ Giris_train, Giris_test, Cikis_train, Cikis_test = train_test_split(Giris, Cikis
 
 
 
-<h3>Modelin Eğitilmesi ve Test Edilmesi</h3>
+<h3>7. Modelin Eğitilmesi ve Test Edilmesi</h3>
 
 ```python
 model = RandomForestClassifier()
@@ -368,7 +368,7 @@ model.fit(Giris_train, Cikis_train)
 - RandomForestClassifier modeli oluşturulur ve eğitim verileriyle eğitilir.
 
 
-<h3>Tahmin Yapılması ve Doğruluk Ölçümü</h3>
+<h3>8. Tahmin Yapılması ve Doğruluk Ölçümü</h3>
 
 ```python
 Cikis_pred = model.predict(Giris_test)
@@ -378,7 +378,7 @@ print("Doğruluk:", metrics.accuracy_score(Cikis_test, Cikis_pred))
 - Test verileri üzerinde tahmin yapılır ve modelin doğruluğu ölçülür.
 
 
-<h3>Özetle Neyi Hedefledik? </h3>
+<h3>9. Özetle Neyi Hedefledik? </h3>
 
 <p>Kod, pirinç yaprak hastalıklarını sınıflandırmak için bir makine öğrenimi modeli oluşturur ve modelin doğruluğunu ölçer. Bu model, görüntüleri gri tonlamalı yapıp, yeniden boyutlandırarak ve düzleştirerek çalışır. RandomForestClassifier kullanılarak hastalık sınıflandırması yapılır ve test verileri üzerinde doğruluk ölçülür. </p>
 
