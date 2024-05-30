@@ -530,3 +530,6 @@ plt.show()
 
 <h2>📝 Sonuç</h2>
 Bu proje, çeşitli parametrelere dayalı olarak binaların ısıtma ve soğutma yüklerini tahmin etmek için yapay sinir ağlarının nasıl kullanılacağını göstermektedir. Sonuçlar, böyle bir regresyon görevi için çok çıkışlı bir model kullanmanın etkinliğini göstermektedir.
+
+<h4>İlk çıkışın R2 değeri : 0.937754312982972</h4>
+<h4>İkinci çıkışın R2 değeri: 0.878525945856873</h4>
