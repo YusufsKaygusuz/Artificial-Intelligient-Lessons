@@ -478,3 +478,53 @@ second_output = Dense(units=1, name='Second_Output__Last_Layer')(second_output_p
 model = Model(inputs=input_layer, outputs=[first_output, second_output])
 
 ```
+
+<h3>Modelin Eğitilmesi</h3>
+Model SGD optimizer ve ortalama kare hata (MSE) kaybı ile derlenir. Aşırı öğrenmeyi önlemek için erken durdurma kullanılır.
+
+```python
+optimizer = tf.keras.optimizers.SGD(learning_rate=0.001)
+model.compile(optimizer=optimizer,
+              loss={'First_Output__Last_Layer': 'mse', 'Second_Output__Last_Layer': 'mse'},
+              metrics={'First_Output__Last_Layer': tf.keras.metrics.RootMeanSquaredError(),
+                       'Second_Output__Last_Layer': tf.keras.metrics.RootMeanSquaredError()})
+
+history = model.fit(x=data_x_train_scaled, y=data_y_train, verbose=0, epochs=500, batch_size=10,
+                    validation_split=0.3, callbacks=[EarlyStopping(monitor='val_loss', patience=10)])
+```
+
+
+<h3>Modelin Değerlendirilmesi</h3>
+Modelin performansı test seti üzerinde R-kare metriği kullanılarak değerlendirilir.
+
+```python
+y_pred = np.array(model.predict(data_x_test_scaled))
+print("İlk çıkışın R2 değeri:", r2_score(data_y_test[:, 0], y_pred[0, :].flatten()))
+print("İkinci çıkışın R2 değeri:", r2_score(data_y_test[:, 1], y_pred[1, :].flatten()))
+```
+
+
+<h3>Sonuçların Gösterilmesi</h3>
+Eğitim ve doğrulama setleri için RMSE kayıplarının grafiği çizilerek modelin performansı görselleştirilir.
+
+```python
+import matplotlib.pyplot as plt
+plt.plot(history.history['First_Output__Last_Layer_root_mean_squared_error'])
+plt.plot(history.history['val_First_Output__Last_Layer_root_mean_squared_error'])
+plt.title("İlk Çıkış için RMSE Değerleri")
+plt.ylabel('RMSE')
+plt.xlabel('Epoch')
+plt.legend(['Eğitim', 'Doğrulama'], loc='upper right')
+plt.show()
+
+plt.plot(history.history['Second_Output__Last_Layer_root_mean_squared_error'])
+plt.plot(history.history['val_Second_Output__Last_Layer_root_mean_squared_error'])
+plt.title("İkinci Çıkış için RMSE Değerleri")
+plt.ylabel('RMSE')
+plt.xlabel('Epoch')
+plt.legend(['Eğitim', 'Doğrulama'], loc='upper right')
+plt.show()
+```
+
+<h2>📝 Sonuç</h2>
+Bu proje, çeşitli parametrelere dayalı olarak binaların ısıtma ve soğutma yüklerini tahmin etmek için yapay sinir ağlarının nasıl kullanılacağını göstermektedir. Sonuçlar, böyle bir regresyon görevi için çok çıkışlı bir model kullanmanın etkinliğini göstermektedir.
