@@ -7,12 +7,6 @@
 <img src="https://github.com/YusufsKaygusuz/Deneyap_Software_Techn/assets/86704802/705deb43-4977-46c8-8d32-b0c34b4b7b66" alt="ReLU" width="125"/>
 <img src="https://github.com/YusufsKaygusuz/Deneyap_Software_Techn/assets/86704802/7bfa61ee-d340-41b9-8855-dec4c561744f" alt="ReLU" width="200"/> 
 <img src="https://github.com/YusufsKaygusuz/Deneyap_Software_Techn/assets/86704802/cd98b111-b66c-4ddb-b0c4-f62ce0ab8b46" alt="ReLU" width="125"/>
-  
-
-
-
-
-
 </p>
 
 
@@ -441,7 +435,12 @@ pip install numpy pandas scikit-learn keras tensorflow matplotlib
 ```
 
 <h2>Kullanım</h2>
-Veri seti bir Excel dosyasından yüklenir ve giriş özellikleri (X) ve hedef çıktılar (y) olarak ayrılır. Veri daha sonra eğitim ve test setlerine bölünür.
+<p>Veri seti bir Excel dosyasından yüklenir ve giriş özellikleri (X) ve hedef çıktılar (y) olarak ayrılır. Veri daha sonra eğitim ve test setlerine bölünür.</p>
+
+<img src="https://github.com/YusufsKaygusuz/Artificial-Intelligient-Lessons/assets/86704802/8f5925cd-8ea8-4fd1-a61e-5e935117899a" alt="ReLU" width="550"/>
+
+
+
 
 <h3>Verinin Ölçeklendirilmesi</h3>
 Girdi özellikleri StandardScaler kullanılarak ölçeklendirilir, böylece verinin ortalaması 0 ve standart sapması 1 olur. Bu, sinir ağlarının eğitimi için önemlidir.
