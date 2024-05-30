@@ -20,7 +20,7 @@
 | 📆 Week 2 | [**Bulaşık Yıkama Süresi Kontrol Sistemi**](#week-2-bulaşık-yıkama-süresi-kontrol-sistemi) |
 | 📆 Week 3 | [**Naive Bayes ile Kalp Ritim Tespiti**](#week-3-naive-bayes-ile-kalp-ritim-tespiti) |
 | 📆 Week 4 | [**Kalp Ritim Bozukluğu Tespiti ve Hastalıklı Yaprak Analizi**](#week-4-kalp-ritim-bozukluğu-tespiti-ve-hastalıklı-yaprak-analizi) |
-| 📆 Week 5 | [**Yapay Sinir Ağları ile Isıtma ve Soğutma Yükü Tahmini**](#week-5-yapay-sinir-ağları-ile-ısıtma-ve-soğutma-yükü-tahmini) |
+| 📆 Week 5 | [**Yapay Sinir Ağları ile Isıtma ve Soğutma Yükü Tahmini**](#week-5-yapay-sinir-ağları-ile-isıtma-ve-soğutma-yükü-tahmini) |
 
 
 ## Week 1: Iris Veri Seti ile Sınıflandırma
