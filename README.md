@@ -3,10 +3,11 @@
 <p align="center">
 <img src="https://github.com/YusufsKaygusuz/Deneyap_Software_Techn/assets/86704802/cd98b111-b66c-4ddb-b0c4-f62ce0ab8b46" alt="ReLU" width="125"/>
 <img src="https://github.com/YusufsKaygusuz/Deneyap_Software_Techn/assets/86704802/7bfa61ee-d340-41b9-8855-dec4c561744f" alt="ReLU" width="200"/> 
+<img src="https://github.com/YusufsKaygusuz/Artificial-Intelligient-Lessons/assets/86704802/cf3cd24d-6feb-47f0-9117-d9d305b6a7d7" alt="ReLU" width="150"/>
 <img src="https://github.com/YusufsKaygusuz/Deneyap_Software_Techn/assets/86704802/a4e54abd-9ff4-4d8f-b784-bd0653e9b8f3" alt="ReLU" width="125"/>
 <img src="https://github.com/YusufsKaygusuz/Deneyap_Software_Techn/assets/86704802/a90a23b8-0c21-40ee-9617-b17d2858b100" alt="ReLU" width="125"/>
 <img src="https://github.com/YusufsKaygusuz/Deneyap_Software_Techn/assets/86704802/705deb43-4977-46c8-8d32-b0c34b4b7b66" alt="ReLU" width="125"/>
-<img src="https://github.com/YusufsKaygusuz/Artificial-Intelligient-Lessons/assets/86704802/cf3cd24d-6feb-47f0-9117-d9d305b6a7d7" alt="ReLU" width="125"/>
+
 
 
 </p>
@@ -19,6 +20,8 @@
 | 📆 Week 2 | [**Bulaşık Yıkama Süresi Kontrol Sistemi**](#week-2-bulaşık-yıkama-süresi-kontrol-sistemi) |
 | 📆 Week 3 | [**Naive Bayes ile Kalp Ritim Tespiti**](#week-3-naive-bayes-ile-kalp-ritim-tespiti) |
 | 📆 Week 4 | [**Kalp Ritim Bozukluğu Tespiti ve Hastalıklı Yaprak Analizi**](#week-4-kalp-ritim-bozukluğu-tespiti-ve-hastalıklı-yaprak-analizi) |
+| 📆 Week 5 | [**Yapay Sinir Ağları ile Isıtma ve Soğutma Yükü Tahmini**](#week-5-yapay-sinir-ağları-ile-ısıtma-ve-soğutma-yükü-tahmini) |
+
 
 ## Week 1: Iris Veri Seti ile Sınıflandırma
 
@@ -386,7 +389,92 @@ print("Doğruluk:", metrics.accuracy_score(Cikis_test, Cikis_pred))
 
 
 
+## Week 5: Yapay Sinir Ağları ile Isıtma ve Soğutma Yükü Tahmini
+
+<p>Bu proje, Tsanas ve Xifara (2012) tarafından sağlanan 768 örnekten oluşan bir veri setini kullanarak çeşitli giriş parametrelerine göre binaların ısıtma ve soğutma yüklerini yapay sinir ağları (YSA) kullanarak tahmin etmeyi amaçlamaktadır. </p>
+
+<h2>Veri Seti</h2>
+Veri seti aşağıdaki giriş parametrelerini içermektedir:
+
+- 🧱Rölatif sıkılık
+- Yüzey alanı
+- Duvar alanı
+- Çatı alanı
+- Bina yüksekliği
+- Oryantasyon
+- Cam alanı
+- Cam alan dağılımı
+
+<h3>Hedef çıktılar ise</h3>
+
+- Isıtma yükü
+- Soğutma yükü
+
+<h3>🏗️ Proje Yapısı</h3>
+Proje aşağıdaki adımları içermektedir:
+
+- Verinin yüklenmesi ve ön işlenmesi
+- Verinin eğitim ve test setlerine ayrılması
+- Girdi özelliklerinin ölçeklendirilmesi
+- YSA modelinin oluşturulması
+- Modelin eğitilmesi
+- Modelin performansının değerlendirilmesi
 
 
+<h2>🛠️ Kurulum</h2>
+Bu projeyi çalıştırmak için aşağıdaki kütüphanelerin yüklü olması gerekmektedir:
 
+- numpy
+- pandas
+- scikit-learn
+- keras
+- tensorflow
+- matplotlib
 
+Bu kütüphaneleri pip kullanarak yükleyebilirsiniz:
+
+```python
+pip install numpy pandas scikit-learn keras tensorflow matplotlib
+```
+
+<h2>Kullanım</h2>
+Veri seti bir Excel dosyasından yüklenir ve giriş özellikleri (X) ve hedef çıktılar (y) olarak ayrılır. Veri daha sonra eğitim ve test setlerine bölünür.
+
+<h3>Verinin Ölçeklendirilmesi</h3>
+Girdi özellikleri StandardScaler kullanılarak ölçeklendirilir, böylece verinin ortalaması 0 ve standart sapması 1 olur. Bu, sinir ağlarının eğitimi için önemlidir.
+
+<h3>YSA Modelinin Oluşturulması</h3>
+Isıtma ve soğutma yüklerini tahmin etmek için ortak bir yol ve iki ayrı yol kullanan bir sinir ağı modeli Keras kullanılarak oluşturulur.
+
+```python
+# Girdi katmanını tanımla, veri kümesindeki özellik sayısına göre şekil belirle
+input_layer = Input(shape=(data_x_train_scaled.shape[1],), name='Input_Layer')
+
+# İlk yoğun katmanı tanımla, 128 birim ve 'relu' aktivasyon fonksiyonu kullan
+common_path = Dense(units=128, activation='relu', name='First_Dense')(input_layer)
+
+# Aşırı öğrenmeyi önlemek için dropout katmanı ekle, dropout oranı %30
+common_path = Dropout(0.3)(common_path)
+
+# İkinci yoğun katmanı tanımla, yine 128 birim ve 'relu' aktivasyon fonksiyonu kullan
+common_path = Dense(units=128, activation='relu', name='Second_Dense')(common_path)
+
+# Aşırı öğrenmeyi önlemek için ikinci dropout katmanı ekle, dropout oranı %30
+common_path = Dropout(0.3)(common_path)
+
+# İlk çıkış katmanını tanımla, bir birim ile (Isıtma yükü tahmini için)
+first_output = Dense(units=1, name='First_Output__Last_Layer')(common_path)
+
+# İkinci çıkış yolu için ilk yoğun katmanı tanımla, 64 birim ve 'relu' aktivasyon fonksiyonu kullan
+second_output_path = Dense(units=64, activation='relu', name='Second_Output__First_Dense')(common_path)
+
+# Aşırı öğrenmeyi önlemek için üçüncü dropout katmanı ekle, dropout oranı %30
+second_output_path = Dropout(0.3)(second_output_path)
+
+# İkinci çıkış katmanını tanımla, bir birim ile (Soğutma yükü tahmini için)
+second_output = Dense(units=1, name='Second_Output__Last_Layer')(second_output_path)
+
+# Modeli tanımla, giriş katmanı ve iki çıkış katmanını belirt
+model = Model(inputs=input_layer, outputs=[first_output, second_output])
+
+```
