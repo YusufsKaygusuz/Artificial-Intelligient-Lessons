@@ -437,8 +437,8 @@ pip install numpy pandas scikit-learn keras tensorflow matplotlib
 
 <h2>Kullanım</h2>
 <p>Veri seti bir Excel dosyasından yüklenir ve giriş özellikleri (X) ve hedef çıktılar (y) olarak ayrılır. Veri daha sonra eğitim ve test setlerine bölünür.</p>
+<img src="https://github.com/YusufsKaygusuz/Artificial-Intelligient-Lessons/assets/86704802/8f5925cd-8ea8-4fd1-a61e-5e935117899a" alt="ReLU" width="125"/>
 
-<img src="https://github.com/YusufsKaygusuz/Artificial-Intelligient-Lessons/assets/86704802/8f5925cd-8ea8-4fd1-a61e-5e935117899a" alt="ReLU" width="550"/>
 
 
 
@@ -544,13 +544,17 @@ Bu proje, çeşitli parametrelere dayalı olarak binaların ısıtma ve soğutma
 
 <p>Bu proje, bir 11x11 ızgara ortamında Q-Learning algoritması kullanarak bir robotun kargo teslimatı yapmasını simüle etmektedir. Robot, belirli geçit noktalarından geçerek bir ödül noktasına ulaşmayı amaçlamaktadır. </p> 
 
+![Ekran Resmi 2024-05-30 20 13 02](https://github.com/YusufsKaygusuz/Artificial-Intelligient-Lessons/assets/86704802/51f309f2-8d59-45fe-bdea-1c7f873d8f9a)
+
+
 <h2>Proje Hakkında</h2>
 
-<p>Bu proje, Q-learning algoritmasını kullanarak bir robotun kargo teslimatı yapmasını simüle eder. 11x11 bir ızgara ortamında robot, geçit noktalarından geçerek belirli bir ödül noktasına ulaşmaya çalışır. Ödül matrisi başlangıçta -100 ile başlatılır ve ödül noktası 0,5 koordinatında 100 ödül değeri taşır. Geçit noktalarında ödül -1'dir. 
-Python dosyasını çalıştırarak Q-learning algoritmasının eğitimini tamamlayabilir ve ardından robotun kargo noktasına ulaşacağı rotayı belirleyebilirsiniz:
+<p>Bu proje, Q-learning algoritmasını kullanarak bir robotun kargo teslimatı yapmasını simüle eder. 11x11 bir ızgara ortamında robot, geçit noktalarından geçerek belirli bir ödül noktasına ulaşmaya çalışır. Ödül matrisi başlangıçta -100 ile başlatılır ve ödül noktası 0,5 koordinatında 100 ödül değeri taşır. Geçit noktalarında ödül -1'dir. Python dosyasını çalıştırarak Q-learning algoritmasının eğitimini tamamlayabilir ve ardından robotun kargo noktasına ulaşacağı rotayı belirleyebilirsiniz.
 </p>
 
 <h2>Fonksiyonlar</h2>
+
+<p>Bu bölümde, projede kullanılan ana fonksiyonlar ve görevleri açıklanmaktadır. Ortamın boyutlarını belirler ve Q değerlerini sıfırla başlatır. Hareketleri tanımlar ve ödül matrisini -100 ile başlatır. Ödül noktası 0,5 koordinatında 100 ödül değeri taşır.</p>
 
 ```python
 # Ortam boyutlarını belirle
@@ -569,7 +573,7 @@ oduller[0,5] = 100.
 ```
 
 <h3>Geçit Noktaları</h3>
-<p>Geçit noktaları ve ödülleri şu şekilde tanımlanmıştır</p>
+<p>Geçit noktalarını ve ödüllerini tanımlar ve ödül matrisine ekler.</p>
 
 ```python
 # Geçit Noktalarını Tanımla
@@ -593,6 +597,8 @@ for satir_indeks in range(1,10):
 
 <h3>Engel Kontrol Fonksiyonu</h3>
 
+<p>Verilen bir konumda engel olup olmadığını kontrol eder.</p>
+
 ```python
 def engel_mi(gecerli_satir_indeks, gecerli_sutun_indeks):
     if oduller[gecerli_satir_indeks, gecerli_sutun_indeks] == -1.:
@@ -602,6 +608,8 @@ def engel_mi(gecerli_satir_indeks, gecerli_sutun_indeks):
 ```
 
 <h3>Rastgele Başlangıç Noktası Belirleme</h3>
+
+<p>Robotun başlayacağı rastgele bir başlangıç noktasını belirler.</p>
 
 ```python
 def baslangic_belirle():
@@ -617,6 +625,8 @@ def baslangic_belirle():
 
 <h3>Sonraki Hareketi Belirleme</h3>
 
+<p>Robotun bir sonraki hareketini epsilon-greedy stratejisi kullanarak belirler.</p>
+
 ```python
 def sonraki_hareket_belirle(gecerli_satir_indeks, gecerli_sutun_indeks, epsilon):
     if np.random.random() < epsilon:
@@ -628,6 +638,8 @@ def sonraki_hareket_belirle(gecerli_satir_indeks, gecerli_sutun_indeks, epsilon)
 
 
 <h3>Sonraki Noktaya Git</h3>
+
+<p>Robotun bir sonraki adımda hangi noktaya gideceğini belirler.</p>
 
 ```python
 def sonraki_noktaya_git(gecerli_satir_indeks, gecerli_sutun_indeks, hareket_indeks):
@@ -649,6 +661,8 @@ def sonraki_noktaya_git(gecerli_satir_indeks, gecerli_sutun_indeks, hareket_inde
 
 <h3>En Kısa Mesafeyi Belirleme</h3>
 
+<p>Verilen başlangıç noktasından ödül noktasına giden en kısa mesafeyi belirler.</p>
+
 ```python
 def en_kisa_mesafe(basla_satir_indeks, basla_sutun_indeks):
     if engel_mi(basla_satir_indeks, basla_sutun_indeks):
@@ -668,6 +682,8 @@ def en_kisa_mesafe(basla_satir_indeks, basla_sutun_indeks):
 
 
 <h3>Q-Learning Algoritması</h3>
+
+<p>Q-learning algoritmasının ana döngüsü. Algoritma, verilen adım sayısı boyunca ortamda hareket ederek Q değerlerini günceller.</p>
 
 ```python
 # Q-learning parametreleri
