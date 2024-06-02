@@ -572,7 +572,7 @@ oduller = np.full((ortam_satir_sayisi, ortam_sutun_sayisi), -100.)
 oduller[0,5] = 100.
 ```
 
-<h3>Geçit Noktaları</h3>
+<h3>🚇 Geçit Noktaları</h3>
 <p>Geçit noktalarını ve ödüllerini tanımlar ve ödül matrisine ekler.</p>
 
 ```python
@@ -595,7 +595,7 @@ for satir_indeks in range(1,10):
         oduller[satir_indeks, sutun_indeks] = -1.
 ```
 
-<h3>Engel Kontrol Fonksiyonu</h3>
+<h3>🚧 Engel Kontrol Fonksiyonu</h3>
 
 <p>Verilen bir konumda engel olup olmadığını kontrol eder.</p>
 
@@ -607,7 +607,7 @@ def engel_mi(gecerli_satir_indeks, gecerli_sutun_indeks):
         return True
 ```
 
-<h3>Rastgele Başlangıç Noktası Belirleme</h3>
+<h3>✅ Rastgele Başlangıç Noktası Belirleme</h3>
 
 <p>Robotun başlayacağı rastgele bir başlangıç noktasını belirler.</p>
 
@@ -623,7 +623,7 @@ def baslangic_belirle():
 
 
 
-<h3>Sonraki Hareketi Belirleme</h3>
+<h3>🦾 Sonraki Hareketi Belirleme</h3>
 
 <p>Robotun bir sonraki hareketini epsilon-greedy stratejisi kullanarak belirler.</p>
 
@@ -637,7 +637,7 @@ def sonraki_hareket_belirle(gecerli_satir_indeks, gecerli_sutun_indeks, epsilon)
 
 
 
-<h3>Sonraki Noktaya Git</h3>
+<h3>📍 Sonraki Noktaya Git</h3>
 
 <p>Robotun bir sonraki adımda hangi noktaya gideceğini belirler.</p>
 
@@ -659,7 +659,7 @@ def sonraki_noktaya_git(gecerli_satir_indeks, gecerli_sutun_indeks, hareket_inde
 
 
 
-<h3>En Kısa Mesafeyi Belirleme</h3>
+<h3>🏁 En Kısa Mesafeyi Belirleme</h3>
 
 <p>Verilen başlangıç noktasından ödül noktasına giden en kısa mesafeyi belirler.</p>
 
@@ -681,7 +681,7 @@ def en_kisa_mesafe(basla_satir_indeks, basla_sutun_indeks):
 
 
 
-<h3>Q-Learning Algoritması</h3>
+<h3>🥷🏻 Q-Learning Algoritması</h3>
 
 <p>Q-learning algoritmasının ana döngüsü. Algoritma, verilen adım sayısı boyunca ortamda hareket ederek Q değerlerini günceller.</p>
 
@@ -707,7 +707,7 @@ print('Eğitim tamamlandı.')
 ```
 
 
-<h3>Robotun Hareketi</h3>
+<h3>🤖 Robotun Hareketi</h3>
 
 ```python
 ogr_sonrasi_satir = input('Robotun harekete başlayacağı satır indeksini giriniz: ')
@@ -718,7 +718,7 @@ print('Kargo noktasına giden rota: ', en_kisa_mesafe(int(ogr_sonrasi_satir), in
 
 ```
 
-<h3>En kısa mesafeyi hesapla ve ekrana yazdır</h3>
+<h3>🛫 En kısa mesafeyi hesapla ve ekrana yazdır</h3>
 
 ```python
 print('Kargo noktasına giden rota: ', en_kisa_mesafe(int(ogr_sonrasi_satir), int(ogr_sonrasi_sutun)))
