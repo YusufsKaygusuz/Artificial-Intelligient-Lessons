@@ -18,6 +18,7 @@
 | 📆 Week 3 | [**Naive Bayes ile Kalp Ritim Tespiti**](#week-3-naive-bayes-ile-kalp-ritim-tespiti) |
 | 📆 Week 4 | [**Kalp Ritim Bozukluğu Tespiti ve Hastalıklı Yaprak Analizi**](#week-4-kalp-ritim-bozukluğu-tespiti-ve-hastalıklı-yaprak-analizi) |
 | 📆 Week 5 | [**Yapay Sinir Ağları ile Isıtma ve Soğutma Yükü Tahmini**](#week-5-yapay-sinir-ağları-ile-isıtma-ve-soğutma-yükü-tahmini) |
+| 📆 Week 6 | [**Q-Learning ile Kargo Teslimatı**](#week-6-q-learning-ile-kargo-teslimatı) |
 
 
 ## Week 1: Iris Veri Seti ile Sınıflandırma
@@ -533,3 +534,176 @@ Bu proje, çeşitli parametrelere dayalı olarak binaların ısıtma ve soğutma
 
 <h4>İlk çıkışın R2 değeri : 0.937754312982972</h4>
 <h4>İkinci çıkışın R2 değeri: 0.878525945856873</h4>
+
+
+
+
+
+
+## Week 6: Q-Learning ile Kargo Teslimatı
+
+<p>Bu proje, bir 11x11 ızgara ortamında Q-Learning algoritması kullanarak bir robotun kargo teslimatı yapmasını simüle etmektedir. Robot, belirli geçit noktalarından geçerek bir ödül noktasına ulaşmayı amaçlamaktadır. </p> 
+
+<h2>Proje Hakkında</h2>
+
+<p>Bu proje, Q-learning algoritmasını kullanarak bir robotun kargo teslimatı yapmasını simüle eder. 11x11 bir ızgara ortamında robot, geçit noktalarından geçerek belirli bir ödül noktasına ulaşmaya çalışır. Ödül matrisi başlangıçta -100 ile başlatılır ve ödül noktası 0,5 koordinatında 100 ödül değeri taşır. Geçit noktalarında ödül -1'dir. 
+Python dosyasını çalıştırarak Q-learning algoritmasının eğitimini tamamlayabilir ve ardından robotun kargo noktasına ulaşacağı rotayı belirleyebilirsiniz:
+</p>
+
+<h2>Fonksiyonlar</h2>
+
+```python
+# Ortam boyutlarını belirle
+ortam_satir_sayisi = 11
+ortam_sutun_sayisi = 11
+
+# Q değerlerini sıfırla başlat
+q_degerleri = np.zeros((ortam_satir_sayisi, ortam_sutun_sayisi, 4))
+
+# Hareketleri tanımla
+hareketler = ['yukari', 'sag', 'asagi', 'sol']
+
+# Ödül matrisini -100 ile başlat ve ödül noktasını tanımla
+oduller = np.full((ortam_satir_sayisi, ortam_sutun_sayisi), -100.)
+oduller[0,5] = 100.
+```
+
+<h3>Geçit Noktaları</h3>
+<p>Geçit noktaları ve ödülleri şu şekilde tanımlanmıştır</p>
+
+```python
+# Geçit Noktalarını Tanımla
+gecitler = {}
+gecitler[1] = [i for i in range (1,10)]
+gecitler[2] = [1, 7, 9]
+gecitler[3] = [i for i in range(1,8)]
+gecitler[3].append(9)
+gecitler[4] = [3, 7]
+gecitler[5] = [i for i in range(11)]
+gecitler[6] = [5]
+gecitler[7] = [i for i in range(1, 10)]
+gecitler[8] = [3, 7]
+gecitler[9] = [i for i in range(11)]
+
+# Geçit noktalarını ödül matrisine ekle
+for satir_indeks in range(1,10):
+    for sutun_indeks in gecitler[satir_indeks]:
+        oduller[satir_indeks, sutun_indeks] = -1.
+```
+
+<h3>Engel Kontrol Fonksiyonu</h3>
+
+```python
+def engel_mi(gecerli_satir_indeks, gecerli_sutun_indeks):
+    if oduller[gecerli_satir_indeks, gecerli_sutun_indeks] == -1.:
+        return False
+    else:
+        return True
+```
+
+<h3>Rastgele Başlangıç Noktası Belirleme</h3>
+
+```python
+def baslangic_belirle():
+    gecerli_satir_indeks = np.random.randint(ortam_satir_sayisi)
+    gecerli_sutun_indeks = np.random.randint(ortam_sutun_sayisi)
+    while engel_mi(gecerli_satir_indeks, gecerli_sutun_indeks):
+        gecerli_satir_indeks = np.random.randint(ortam_satir_sayisi)
+        gecerli_sutun_indeks = np.random.randint(ortam_sutun_sayisi)
+    return gecerli_satir_indeks, gecerli_sutun_indeks
+```
+
+
+
+<h3>Sonraki Hareketi Belirleme</h3>
+
+```python
+def sonraki_hareket_belirle(gecerli_satir_indeks, gecerli_sutun_indeks, epsilon):
+    if np.random.random() < epsilon:
+        return np.argmax(q_degerleri[gecerli_satir_indeks, gecerli_sutun_indeks])
+    else:
+        return np.random.randint(4)
+```
+
+
+
+<h3>Sonraki Noktaya Git</h3>
+
+```python
+def sonraki_noktaya_git(gecerli_satir_indeks, gecerli_sutun_indeks, hareket_indeks):
+    yeni_satir_indeks = gecerli_satir_indeks
+    yeni_sutun_indeks = gecerli_sutun_indeks
+
+    if hareketler[hareket_indeks] == 'yukari' and gecerli_satir_indeks > 0:
+        yeni_satir_indeks -= 1
+    elif hareketler[hareket_indeks] == 'sag' and gecerli_sutun_indeks < ortam_sutun_sayisi - 1:
+        yeni_sutun_indeks += 1
+    elif hareketler[hareket_indeks] == 'asagi' and gecerli_satir_indeks < ortam_satir_sayisi - 1:
+        yeni_satir_indeks += 1
+    elif hareketler[hareket_indeks] == 'sol' and gecerli_sutun_indeks > 0:
+        yeni_sutun_indeks -= 1
+    return yeni_satir_indeks, yeni_sutun_indeks
+```
+
+
+
+<h3>En Kısa Mesafeyi Belirleme</h3>
+
+```python
+def en_kisa_mesafe(basla_satir_indeks, basla_sutun_indeks):
+    if engel_mi(basla_satir_indeks, basla_sutun_indeks):
+        return []
+    else:
+        gecerli_satir_indeks, gecerli_sutun_indeks = basla_satir_indeks, basla_sutun_indeks
+        en_kisa = []
+        en_kisa.append([gecerli_satir_indeks, gecerli_sutun_indeks])
+        while not engel_mi(gecerli_satir_indeks, gecerli_sutun_indeks):
+            hareket_indeks = sonraki_hareket_belirle(gecerli_satir_indeks, gecerli_sutun_indeks, 1.)
+            gecerli_satir_indeks, gecerli_sutun_indeks = sonraki_noktaya_git(gecerli_satir_indeks, 
+                                                                       gecerli_sutun_indeks, hareket_indeks)
+            en_kisa.append([gecerli_satir_indeks, gecerli_sutun_indeks])
+        return en_kisa
+```
+
+
+
+<h3>Q-Learning Algoritması</h3>
+
+```python
+# Q-learning parametreleri
+epsilon = 0.9
+azalma_degeri = 0.9
+ogrenme_orani = 0.9
+
+# Q-learning algoritmasını çalıştır
+for adim in range(1000):
+  satir_indeks, sutun_indeks = baslangic_belirle()
+  while not engel_mi(satir_indeks, sutun_indeks):
+    hareket_indeks = sonraki_hareket_belirle(satir_indeks, sutun_indeks, epsilon)
+    eski_satir_indeks, eski_sutun_indeks = satir_indeks, sutun_indeks
+    satir_indeks, sutun_indeks = sonraki_noktaya_git(satir_indeks, sutun_indeks, hareket_indeks)
+    odul = oduller[satir_indeks, sutun_indeks]
+    eski_q_degeri = q_degerleri[eski_satir_indeks, eski_sutun_indeks, hareket_indeks]
+    fark = odul + (azalma_degeri * np.max(q_degerleri[satir_indeks, sutun_indeks])) - eski_q_degeri
+    yeni_q_degeri = eski_q_degeri + (ogrenme_orani * fark)
+    q_degerleri[eski_satir_indeks, eski_sutun_indeks, hareket_indeks] = yeni_q_degeri
+print('Eğitim tamamlandı.')
+```
+
+
+<h3>Robotun Hareketi</h3>
+
+```python
+ogr_sonrasi_satir = input('Robotun harekete başlayacağı satır indeksini giriniz: ')
+ogr_sonrasi_sutun = input('Robotun harekete başlayacağı sütun indeksini giriniz: ')
+
+# En kısa mesafeyi hesapla ve ekrana yazdır
+print('Kargo noktasına giden rota: ', en_kisa_mesafe(int(ogr_sonrasi_satir), int(ogr_sonrasi_sutun)))
+
+```
+
+<h3>En kısa mesafeyi hesapla ve ekrana yazdır</h3>
+
+```python
+print('Kargo noktasına giden rota: ', en_kisa_mesafe(int(ogr_sonrasi_satir), int(ogr_sonrasi_sutun)))
+```
