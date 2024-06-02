@@ -437,7 +437,7 @@ pip install numpy pandas scikit-learn keras tensorflow matplotlib
 
 <h2>Kullanım</h2>
 <p>Veri seti bir Excel dosyasından yüklenir ve giriş özellikleri (X) ve hedef çıktılar (y) olarak ayrılır. Veri daha sonra eğitim ve test setlerine bölünür.</p>
-<img src="https://github.com/YusufsKaygusuz/Artificial-Intelligient-Lessons/assets/86704802/8f5925cd-8ea8-4fd1-a61e-5e935117899a" alt="ReLU" width="125"/>
+<img src="https://github.com/YusufsKaygusuz/Artificial-Intelligient-Lessons/assets/86704802/8f5925cd-8ea8-4fd1-a61e-5e935117899a" alt="ReLU" width="400"/>
 
 
 
