@@ -732,14 +732,14 @@ print('Kargo noktasına giden rota: ', en_kisa_mesafe(int(ogr_sonrasi_satir), in
 
 <p>Bu depo, bir fonksiyonu optimize etmek için pygad kütüphanesini kullanarak genetik algoritmayı uygulayan bir Python betiği içermektedir. Amaç, belirli girdilere uygulandığında istenen çıktıyı üreten en iyi değişkenler kümesini bulmaktır.</p>
 
+<img src="https://github.com/YusufsKaygusuz/Artificial-Intelligient-Lessons/assets/86704802/692e257e-5c75-4b30-9f31-11fc5a4eb932" alt="ReLU" width="450"/> 
+
 <p>Bu proje, bir fonksiyon için en uygun çözümü bulmak amacıyla genetik algoritmanın nasıl kullanılacağını göstermektedir. Genetik algoritma, bir fitness fonksiyonuna göre en iyi bireyleri seçerek çoklu nesiller boyunca çözümler popülasyonunu geliştirir. Fitness fonksiyonu, çözümün istenen çıktıya ne kadar yakın olduğunu ölçer.</p>
 
 
 <h2>Kod Açıklaması</h2>
 
-Betik aşağıdaki ana bileşenleri içermektedir:
-
-<h3>Fonksiyon Girişleri ve İstenen Çıktı</h3>
+<h3>1. Fonksiyon Girişleri ve İstenen Çıktı</h3>
 <p>Fonksiyon girişleri, optimize edilmek istenen fonksiyonun değişkenleridir. İstenen çıktı, bu fonksiyonun ulaşması gereken hedef değeri belirtir.</p>
 
 ```python
@@ -747,7 +747,7 @@ function_inputs = [4, -2, 3.5, 5, -11, -4.7]
 desired_output = 44
 ```
 
-<h3>Fitness Fonksiyonu</h3>
+<h3>2. Fitness Fonksiyonu</h3>
 
 ```python
 def fitness_func(ga_instance, solution, solution_idx):
@@ -758,7 +758,7 @@ def fitness_func(ga_instance, solution, solution_idx):
 
 <p>Fitness fonksiyonu, her çözümün ne kadar iyi olduğunu belirler. Bu fonksiyon, çözümler ile fonksiyon girişlerinin çarpımının toplamını hesaplar ve bu toplamın istenen çıktıya ne kadar yakın olduğunu ölçer.</p>
 
-<h3>Genetik Algoritma Parametreleri</h3>
+<h3>3. Genetik Algoritma Parametreleri</h3>
 
 <p>Genetik algoritmanın çalışma parametrelerini belirler. Toplam nesil sayısı, eşleşecek ebeveyn sayısı, popülasyon başına çözüm sayısı ve her çözümdeki gen sayısı bu parametreler arasındadır.</p>
 
@@ -769,7 +769,7 @@ sol_per_pop = 50
 num_genes = len(function_inputs)
 ```
 
-<h3>Nesil Özeti Fonksiyonu</h3>
+<h3>4. Nesil Özeti Fonksiyonu</h3>
 
 <p>Genetik algoritma örneğini oluşturur ve belirlenen parametreler ile çalıştırır.</p>
 
@@ -782,7 +782,7 @@ def nesil_ozeti(ga_instance):
     last_fitness = ga_instance.best_solution()[1]
 ```
 
-<h3>En İyi Çözümün Alınması ve Gösterilmesi</h3>
+<h3>5. En İyi Çözümün Alınması ve Gösterilmesi</h3>
 
 <p>Genetik algoritma tarafından bulunan en iyi çözümü, bu çözümün fitness değerini ve bu çözümün bulunduğu nesli alır ve gösterir.</p>
 
@@ -797,7 +797,7 @@ if ga_instance.best_solution_generation != -1:
 ```
 
 
-<h3>Sonuçlar</h3>
+<h3>6. Sonuçlar</h3>
 Kod, genetik algoritma tarafından bulunan en iyi çözümü, bu çözümün fitness değerini ve en iyi çözümün bulunduğu nesli çıktı olarak verir. Süreç, çözümlerin evrimini zamanla gözlemleyebilmek için her nesilden sonra günlük bilgileri içerir.
 
 
