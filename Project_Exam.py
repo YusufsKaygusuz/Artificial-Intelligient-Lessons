@@ -1,5 +1,4 @@
 # Regression (Tahminleme) için Kodlar % 96 Doğruluk Değeri
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -123,19 +122,11 @@ plt.title('Error Analysis')
 plt.xlabel('Error Category')
 plt.ylabel('Frequency')
 plt.show()
-
-
-
-
-
-
-
-
+# Regression (Tahminleme) için Kodlar % 96 Doğruluk Değeri Sonu
 
 
 
 # Classification (Sınıflandırma) için Doğru Kodlar % 90 Doğruluk Değeri
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -212,5 +203,5 @@ plt.title('Confusion Matrix')
 plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.show()
-
+# Classification (Sınıflandırma) için Doğru Kodlar % 90 Doğruluk Değeri Sonu
 
