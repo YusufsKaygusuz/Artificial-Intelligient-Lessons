@@ -6,7 +6,6 @@
 
 <img src="https://github.com/user-attachments/assets/4c3db211-57a9-4f3c-8ecb-7903fdf6dd3a" alt="ReLU" width="150"/>
 <img src="https://github.com/YusufsKaygusuz/Deneyap_Software_Techn/assets/86704802/705deb43-4977-46c8-8d32-b0c34b4b7b66" alt="ReLU" width="125"/>
-<img src="https://github.com/YusufsKaygusuz/Deneyap_Software_Techn/assets/86704802/7bfa61ee-d340-41b9-8855-dec4c561744f" alt="ReLU" width="200"/> 
 <img src="https://github.com/YusufsKaygusuz/Deneyap_Software_Techn/assets/86704802/cd98b111-b66c-4ddb-b0c4-f62ce0ab8b46" alt="ReLU" width="125"/>
 </p>
 
